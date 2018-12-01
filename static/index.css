@@ -1,3 +1,8 @@
+
+body{
+  background: #F2EEEE;
+}
+
 .knockout {
   background: url(http://apod.nasa.gov/apod/image/0603/coma_misti.jpg) -80px -80px;
   color: red;
@@ -11,6 +16,17 @@
   text-align: center;
 }
 
-body{
-  background: #F2EEEE;
+.container{
+  position:relative;
+  top:200px;
+  left:35%;
+  display:block;
+  margin-bottom:80px;
+  width:500px;
+  height:360px;
+  background:#fff;
+  border-radius:5px;
+  overflow:hidden;
+  z-index:1;
 }
+

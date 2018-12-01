@@ -1,11 +1,34 @@
 <html>
-  <head>
-    <title>ASL Translator</title>
-    <link href="../static/index.css" rel="stylesheet">
-  </head>
-  <body>
-    
-  	<div class="knockout">DEMO</div>
-    <img src="{{ url_for('video_feed') }}">
-  </body>
+<head>
+	<title>ASL Translator</title>
+	<link href="../static/index.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div class="knockout">DEMO</div>
+	<div class="container">
+		<div class="text-center">
+			<h3>Outputs:</h3>
+		</div>
+	</div>
+	<div class="container">
+		<div class="text-center">
+			<img src="{{ url_for('video_feed') }}" height='70%' >
+		</div>
+	</div>
+	<br>
+	<div class="container">
+		<form action="takePhoto" method="POST">
+			<div class="text-center">
+				<button type="submit" class="btn btn-primary mb-2">Take Photo</button>
+			</div>
+		</div>
+
+	</form>
+</body>
 </html>
