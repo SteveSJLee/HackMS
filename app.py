@@ -1,10 +1,11 @@
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, redirect, flash
 import json 
 import requests
 from camera import VideoCamera
 import ast
 
 app = Flask(__name__)
+app.secret_key = 'mshackathone'
 
 @app.route('/')
 def index():
@@ -39,7 +40,8 @@ def takePhoto():
     print("result", result)
     result = ast.literal_eval(result)
     print("output", result['best'])
-    return render_template('index.html')
+    flash(result, 'result')
+    return redirect(url_for("index"))
 
 
 if __name__ == '__main__':

@@ -14,6 +14,15 @@
 	<div class="container">
 		<div class="text-center">
 			<h3>Outputs:</h3>
+                {% with response = get_flashed_messages(category_filter=["result"]) %}
+                {% if response %}
+                <ul>
+                    {%- for msg in response %}
+                    <p>{{ msg }}</p>
+                    {% endfor -%}
+                 </ul>
+                 {% endif %}
+                 {% endwith %}
 		</div>
 	</div>
 	<div class="container">
