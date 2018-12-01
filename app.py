@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response, redirect, flash
+from flask import Flask, render_template, Response, redirect, flash, url_for
 import json 
 import requests
 from camera import VideoCamera
@@ -40,7 +40,7 @@ def takePhoto():
     print("result", result)
     result = ast.literal_eval(result)
     print("output", result['best'])
-    flash(result, 'result')
+    flash(result['best'], 'result')
     return redirect(url_for("index"))
 
 

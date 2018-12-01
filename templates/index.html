@@ -13,16 +13,26 @@
 	<div class="knockout">DEMO</div>
 	<div class="container">
 		<div class="text-center">
+			<div class="form-group" >
+			      <label for="sel1">Destinated Letter:</label>
+			      <select class="form-control" id="sel1">
+			        <option>A</option>
+			        <option>B</option>
+			        <option>C</option>
+			        <option>D</option>
+			      </select>
+			 </div>
+
 			<h3>Outputs:</h3>
-                {% with response = get_flashed_messages(category_filter=["result"]) %}
-                {% if response %}
-                <ul>
-                    {%- for msg in response %}
-                    <p>{{ msg }}</p>
-                    {% endfor -%}
-                 </ul>
-                 {% endif %}
-                 {% endwith %}
+			{% with response = get_flashed_messages(category_filter=["result"]) %}
+			{% if response %}
+			<ul>
+				{%- for msg in response %}
+				<h3>{{ msg }}</h3>
+				{% endfor -%}
+			</ul>
+			{% endif %}
+			{% endwith %}
 		</div>
 	</div>
 	<div class="container">
@@ -30,14 +40,12 @@
 			<img src="{{ url_for('video_feed') }}" height='70%' >
 		</div>
 	</div>
-	<br>
 	<div class="container">
 		<form action="takePhoto" method="POST">
 			<div class="text-center">
 				<button type="submit" class="btn btn-primary mb-2">Take Photo</button>
 			</div>
-		</div>
-
-	</form>
+		</form>
+	</div>
 </body>
 </html>
