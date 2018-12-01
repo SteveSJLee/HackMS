@@ -35,12 +35,10 @@ def takePhoto():
     data = json.dumps(data)
 
     r = requests.post(url, json=data)
-    print('response is\n\n\n\n')
-
     result = ast.literal_eval(r.text)
-    print(result)
-    print("type", type(result))
-    print(result['best'])
+    print("result", result)
+    result = ast.literal_eval(result)
+    print("output", result['best'])
     return render_template('index.html')
 
 
