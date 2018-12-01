@@ -1,4 +1,6 @@
 from flask import Flask, render_template, Response
+import json 
+import requests
 from camera import VideoCamera
 
 app = Flask(__name__)
@@ -13,10 +15,31 @@ def gen(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
+def capture(camera):
+    img = camera.get_frame(capture="y")
+    return img
+
 @app.route('/video_feed')
 def video_feed():
     return Response(gen(VideoCamera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
+
+@app.route('/takePhoto', methods=['POST'])
+def takePhoto():
+    url  = "http://dsvm726e4ijbkwrgq.eastus2.cloudapp.azure.com:9999/predict"
+    data = {}
+    data['img'] = capture(VideoCamera())
+    print(data['img'])
+
+
+    data = json.dumps(data)
+
+    response = requests.post(url, json=data)
+    print(response)
+    
+    return render_template('index.html')
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', port=8000, debug=True)
