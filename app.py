@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response, redirect, flash, url_for
+from flask import Flask, render_template, Response, redirect, flash, url_for, request
 import json 
 import requests
 from camera import VideoCamera
@@ -29,6 +29,9 @@ def video_feed():
 
 @app.route('/takePhoto', methods=['POST'])
 def takePhoto():
+
+    letter = str(request.form['letter'])
+
     url  = "http://dsvm726e4ijbkwrgq.eastus2.cloudapp.azure.com:9999/predict"
     data = {}
     data['img'] = capture(VideoCamera())
@@ -39,8 +42,14 @@ def takePhoto():
     result = ast.literal_eval(r.text)
     print("result", result)
     result = ast.literal_eval(result)
-    print("output", result['best'])
-    flash(result['best'], 'result')
+    
+    
+    if letter == result['best']:
+        response = "The prediction was %s \n(%s)" %(result['best'], "Correct")
+    else:
+        response = "The prediction was %s \n(%s)" %(result['best'], "Incorrect")
+
+    flash(response, 'result')
     return redirect(url_for("index"))
 
 
