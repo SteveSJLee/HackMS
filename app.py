@@ -2,6 +2,7 @@ from flask import Flask, render_template, Response
 import json 
 import requests
 from camera import VideoCamera
+import ast
 
 app = Flask(__name__)
 
@@ -30,14 +31,16 @@ def takePhoto():
     url  = "http://dsvm726e4ijbkwrgq.eastus2.cloudapp.azure.com:9999/predict"
     data = {}
     data['img'] = capture(VideoCamera())
-    print(data['img'])
-
 
     data = json.dumps(data)
 
-    response = requests.post(url, json=data)
-    print(response)
-    
+    r = requests.post(url, json=data)
+    print('response is\n\n\n\n')
+
+    result = ast.literal_eval(r.text)
+    print(result)
+    print("type", type(result))
+    print(result['best'])
     return render_template('index.html')
 
 
